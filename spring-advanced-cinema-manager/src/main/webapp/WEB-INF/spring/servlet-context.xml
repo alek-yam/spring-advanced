@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<beans:bean class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="order" value="3"/>
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="ru.epam.spring.cinema.web" />
+	
+	<!-- Freemarker view resolver -->
+
+	<beans:bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<beans:property name="templateLoaderPath" value="/WEB-INF/views/" />
+	</beans:bean>
+
+	<beans:bean id="freemarkerViewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<beans:property name="order" value="1"/>
+		<beans:property name="cache" value="true" />
+		<beans:property name="prefix" value="" />
+		<beans:property name="suffix" value=".ftl" />
+	</beans:bean>
+	
+	<!-- View resolver for PDF views -->
+	
+	<beans:bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <beans:property name="order" value="2"/>
+        <beans:property name="basename" value="views"/>
+    </beans:bean>
+	
+	<!-- Interceptors -->
+
+<!-- 	<mvc:interceptors> -->
+<!-- Was replaced by Spring Security interseptor -->
+<!-- 		<mvc:interceptor> -->
+<!-- 			<mvc:mapping path="/booking/**" /> -->
+<!-- 			<mvc:mapping path="/tickets/**" /> -->
+<!-- 			<mvc:mapping path="/users/**" /> -->
+<!-- 			<beans:bean class="ru.epam.spring.cinema.web.interceptor.SecurityInterceptor" /> -->
+<!-- 		</mvc:interceptor> -->
+<!-- 	</mvc:interceptors> -->
+
+</beans:beans>
