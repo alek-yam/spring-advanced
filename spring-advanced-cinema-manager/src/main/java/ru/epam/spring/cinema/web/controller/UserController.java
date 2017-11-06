@@ -162,14 +162,14 @@ public class UserController {
 	private List<UserViewItem> convertToViewItems(Collection<User> users) {
 		List<UserViewItem> items = new ArrayList<UserViewItem>();
 
-		for (User user : users) {
+		/*for (User user : users) {
 			UserViewItem item = new UserViewItem();
 			item.setId(user.getId());
 			item.setFullName(user.getFullName());
 			item.setBirthday(user.getBirthday().getTime());
 			item.setEmail(user.getEmail());
 			items.add(item);
-		}
+		}*/
 
 		return items;
 	}

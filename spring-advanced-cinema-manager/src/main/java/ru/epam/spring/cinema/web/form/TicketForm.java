@@ -52,7 +52,8 @@ public class TicketForm {
 	}
 
 	public String getAuditoriumName() {
-		return event.getAuditoriums().get(date);
+		//return event.getAuditoriums().get(date);
+		return "XXX";
 	}
 
 	private void updateDate() {

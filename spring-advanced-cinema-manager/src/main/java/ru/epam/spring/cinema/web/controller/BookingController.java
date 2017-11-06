@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
@@ -22,11 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import ru.epam.spring.cinema.domain.Auditorium;
-import ru.epam.spring.cinema.domain.BookingReport;
 import ru.epam.spring.cinema.domain.Event;
-import ru.epam.spring.cinema.domain.PriceReport;
 import ru.epam.spring.cinema.domain.Seat;
-import ru.epam.spring.cinema.domain.User;
 import ru.epam.spring.cinema.service.AuditoriumService;
 import ru.epam.spring.cinema.service.BookingService;
 import ru.epam.spring.cinema.service.EventService;
@@ -89,7 +85,7 @@ public class BookingController {
 	public String chooseSeats(@ModelAttribute TicketForm ticketForm,	// why I cannot use session.getAttribute("ticketForm") instead ?
 			@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
 
-		Set<Long> seats = ticketForm.getSeats();
+		/*Set<Long> seats = ticketForm.getSeats();
 		if (seats == null || seats.isEmpty()) {
 			logger.info("Seats are not specified. Page was rejected.");
 			return "booking/seats";
@@ -103,7 +99,7 @@ public class BookingController {
 
 		PriceReport priceReport = bookingService.getFinalPrice(ticketForm.getEvent(), ticketForm.getDate(), user, seats);
 		model.addAttribute("priceReport", priceReport);
-		logger.info("Price report: " + priceReport.toString());
+		logger.info("Price report: " + priceReport.toString());*/
 
 		return "booking/review";
 	}
@@ -112,6 +108,7 @@ public class BookingController {
 	public String bookTickets(@ModelAttribute TicketForm ticketForm,
 			@AuthenticationPrincipal UserDetailsImpl userDetails, SessionStatus status) {
 
+		/*
 		//User user = (User) session.getAttribute("loggedInUser");
 		User user = userDetails.getModelUser();
 
@@ -120,6 +117,7 @@ public class BookingController {
 		logger.info("The tickets were booked successfully: " + bookingReport.toString());
 
 		status.setComplete();	// what is the difference with session.invalidate() ?
+		*/
 
 		return "redirect:/booking/success";
 	}

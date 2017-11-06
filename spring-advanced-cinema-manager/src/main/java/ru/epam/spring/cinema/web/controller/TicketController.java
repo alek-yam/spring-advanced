@@ -15,9 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ru.epam.spring.cinema.domain.Event;
-import ru.epam.spring.cinema.domain.PriceItem;
 import ru.epam.spring.cinema.domain.Ticket;
+import ru.epam.spring.cinema.domain.TicketPrice;
 import ru.epam.spring.cinema.domain.User;
 import ru.epam.spring.cinema.service.BookingService;
 import ru.epam.spring.cinema.service.EventService;
@@ -41,7 +40,7 @@ public class TicketController {
 
 	@RequestMapping(value = "/price", method = RequestMethod.GET)
 	public String showPriceList(Model model) {
-		List<PriceItem> priceList = bookingService.getPriceList();
+		List<TicketPrice> priceList = bookingService.getPriceList();
 		model.addAttribute("priceList", priceList);
 		return "ticket/price";
 	}
@@ -89,7 +88,7 @@ public class TicketController {
 	private List<TicketViewItem> convertToViewItems(Set<Ticket> tickets) {
 		List<TicketViewItem> items = new ArrayList<TicketViewItem>();
 
-		for (Ticket ticket : tickets) {
+		/*for (Ticket ticket : tickets) {
 			User user = userService.getById(ticket.getUserId());
 			Event event = eventService.getById(ticket.getEventId());
 			TicketViewItem item = new TicketViewItem();
@@ -98,7 +97,7 @@ public class TicketController {
 			item.setDate(ticket.getDate().getTime());
 			item.setSeat(ticket.getSeat());
 			items.add(item);
-		}
+		}*/
 
 		return items;
 	}
